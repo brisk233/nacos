@@ -70,6 +70,13 @@ public class LogFileServiceTest {
             testLogFile.delete();
         }
         if (testLogsDir != null && Files.exists(testLogsDir)) {
+            // Delete any remaining files in the directory
+            File[] files = testLogsDir.toFile().listFiles();
+            if (files != null) {
+                for (File file : files) {
+                    file.delete();
+                }
+            }
             Files.delete(testLogsDir);
         }
         System.clearProperty("nacos.logs.path");

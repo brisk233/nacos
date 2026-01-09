@@ -23,7 +23,6 @@ import org.springframework.stereotype.Service;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -106,7 +105,7 @@ public class LogFileService {
         }
         
         LinkedList<String> result = new LinkedList<>();
-        try (BufferedReader reader = new BufferedReader(new FileReader(logFilePath.toFile()))) {
+        try (BufferedReader reader = Files.newBufferedReader(logFilePath)) {
             String line;
             while ((line = reader.readLine()) != null) {
                 result.add(line);
@@ -137,7 +136,7 @@ public class LogFileService {
         }
         
         List<String> result = new ArrayList<>();
-        try (BufferedReader reader = new BufferedReader(new FileReader(logFilePath.toFile()))) {
+        try (BufferedReader reader = Files.newBufferedReader(logFilePath)) {
             String line;
             int currentLine = 1;
             
